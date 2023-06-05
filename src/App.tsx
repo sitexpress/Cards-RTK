@@ -17,6 +17,8 @@ import { createTheme, ThemeProvider } from "@mui/material"
 import { useAppDispatch, useAppSelector } from "@/app/hooks"
 import { useEffect } from "react"
 import { appActions, appReducer } from "@/features/app/app.slice"
+import { authThunks } from "@/features/app/auth/auth.slice"
+import { AuthApi } from "@/features/app/auth/auth.api"
 
 export const Test = () => {
   const isLoading = useAppSelector((state) => state.app.isLoading)
@@ -36,6 +38,19 @@ export const Test = () => {
 
   return (
     <div>
+      <button
+        onClick={() =>
+          dispatch(
+            authThunks.login({
+              email: "eccoPolo@gmail.com",
+              password: "rotor2222",
+              rememberMe: true,
+            }),
+          )
+        }
+      >
+        login
+      </button>
       <button onClick={handleErrorButtonClicked}>create error</button>
       {!!error && <h2>error</h2>}
       <Counter />
